@@ -31,7 +31,7 @@ class MenuAPIView(APIView):
             {
                 "name": "Veggie Burger",
                 "description": "Grilled plant based patty with lettue,tomato and aioil",
-                "price":7.49
+                "price": 7.49
 
             },
             {
@@ -41,11 +41,11 @@ class MenuAPIView(APIView):
             },
             {
                 "name":"Margherita Pizza",
-                "description":"Classic cheese and tomato pizza with fresh basil"
-                "price":8.99
+                "description":"Classic cheese and tomato pizza with fresh basil",
+                "price": 8.99
             }
         ]
-        return response(menu)
+        return Response(menu)
 # Dynamic menu using item model
 class ItemView(APIView):
     def get(self, request):
