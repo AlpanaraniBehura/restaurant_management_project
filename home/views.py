@@ -6,3 +6,6 @@ def homepage(request):
     response = requests.get('http://localhost:8000/api/products/menu/') # API Endpoint
     menu_items = response.json()
     return render(request, 'menu.html', {'menu_items': menu_items})
+
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
