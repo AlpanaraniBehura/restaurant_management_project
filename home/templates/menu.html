@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Restaurant Menu</title>
+    <title>{{ restaurant_name }} Menu</title>
 </head>
 <body>
-    <h1>Our Menu</h1> 
+    <h1>Welcome to {{ restaurant_name }}</h1> 
     <ul>
         {% for item in menu_items %}
             <li>
                 <strong>{{ item.name }}</strong> - Rs.{{ item.price }}<br>
                 {{ item.description }}   
-            </li>   
+            </li>  
+        {% empty %}
+            <li> No Menu Items Available </li>
         {% endfor %}
     </ul>
 </body>
