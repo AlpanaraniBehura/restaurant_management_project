@@ -3,13 +3,16 @@
 <head>
     <title>{{ restaurant_name }} Menu</title>
 </head>
-<body>
-    <h1>Welcome to {{ restaurant_name }}</h1> 
-    <ul>
+<body style="font-family:Arial,sans-serif;background-color:#fafafa;color:#333;margin:0;padding:0;">
+    <div style="max-width:800px;margin:auto;padding:20px">
+    <h1 style="text-align:center;color:#ff6600;">Welcome to {{ restaurant_name }}</h1> 
+    <h2 style="border-bottom:2px solid #ff6600; padding-bottom:5px;">Our Menu</h2>
+    <ul style="list-style: none; padding: 0;">
         {% for item in menu_items %}
-            <li>
-                <strong>{{ item.name }}</strong> - Rs.{{ item.price }}<br>
-                {{ item.description }}   
+            <li style="background:white;margin-bottom:15px;padding:15px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">
+                <strong style="font-size: 1.2em;">{{ item.name }}</strong> 
+                <span style="float: right;color:#28a745;font-weight:bold;">- Rs.{{ item.price }}</span>
+                <p style="margin-top: 5px;font-size:0.95em;color: #555;">{{ item.description }}</p>   
             </li>  
         {% empty %}
             <li> No Menu Items Available </li>
