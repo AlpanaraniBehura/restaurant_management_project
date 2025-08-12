@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ restaurant_name }}- Menu</title>
+    <style>
+        body{
+          font-family:Arial, sans-serif;
+          background-color:#fafafa;
+          padding:20px;
+        }
+
+        h1{
+          text-align:center;
+          color:#ff6600;
+        
+        }
+        ul{
+          list-style:none;
+          max-width: 600px;
+          margin:auto;
+          padding:0;
+        }
+        li{
+          background:white;
+          padding:15px;
+          margin-bottom:10px;
+          border-radius:8px;
+          box-shadow:0px 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .price{
+          float:right;
+          color:#28a745;
+          font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ restaurant_name }}-Our Menu</h1>
+    <ul>
+        {% for item in menu_items %}
+        <li>
+            <strong>{{ item.name }}</strong>
+            <span class="price">Rs. {{ item.price }}</span>
+            <p>{{ item.description }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
