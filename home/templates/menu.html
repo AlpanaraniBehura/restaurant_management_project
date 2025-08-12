@@ -2,21 +2,56 @@
 <html>
 <head>
     <title>{{ restaurant_name }} Menu</title>
+    <style>
+        body{
+          font-family:Arial,sans-serif;
+          margin:20px;
+          background:#fafafa;
+        }
+
+        nav a{
+          margin-right: 15px;
+          text-decoration: none;
+          color: #333;
+        }
+        img{
+          display:block;
+          margin:20px auto;
+          max-width:800px;
+          border-radius: 10px;
+        }
+
+        ul{
+          list-style:none;
+          padding:0;
+        
+        }
+
+        li{
+          margin-bottom: 15px;
+          padding: 10px;
+          background:#f4f4f4;
+          border-radius: 5px;
+        }
+    </style>
 </head>
-<body style="font-family:Arial,sans-serif;background-color:#fafafa;color:#333;margin:0;padding:0;">
-    <div style="max-width:800px;margin:auto;padding:20px">
-    <h1 style="text-align:center;color:#ff6600;">Welcome to {{ restaurant_name }}</h1> 
-    <h2 style="border-bottom:2px solid #ff6600; padding-bottom:5px;">Our Menu</h2>
-    <ul style="list-style: none; padding: 0;">
+
+<body>
+    <nav>
+        <a href="{% url 'homepage'}">Home</a> |
+        <a href="{% url 'about' %}">About Us</a>
+    </nav>
+    <h1>{{restaurant_name}}</h1>
+    <h2>Our Menu</h2>
+    <ul>
         {% for item in menu_items %}
-            <li style="background:white;margin-bottom:15px;padding:15px;border-radius:8px;box-shadow:0 2px 5px rgba(0,0,0,0.1);">
-                <strong style="font-size: 1.2em;">{{ item.name }}</strong> 
-                <span style="float: right;color:#28a745;font-weight:bold;">- Rs.{{ item.price }}</span>
-                <p style="margin-top: 5px;font-size:0.95em;color: #555;">{{ item.description }}</p>   
-            </li>  
+        <li>
+            <strong>{{ item.name }}</strong> - Rs.{{ item.price }}<br> {{ item.description }}
+        </li>
         {% empty %}
-            <li> No Menu Items Available </li>
+        <li>No Menu items available.</li>
         {% endfor %}
     </ul>
 </body>
-</html>            
+</html>
+          
