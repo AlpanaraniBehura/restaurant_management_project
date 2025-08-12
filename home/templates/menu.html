@@ -4,21 +4,46 @@
     <title>{{ restaurant_name }} Menu</title>
     <style>
         body{
-          font-family:Arial,sans-serif;
-          margin:20px;
-          background:#fafafa;
+          font-family:'Segoe UI',Tahoma,sans-serif;
+          margin:0;
+          padding:0;
+          color:#333;
+          background-color:#fdfdfd;
+        }
+        nav{
+          background:#ff6600;
+          padding:15px;
+          text-align: center;
+        
         }
 
         nav a{
-          margin-right: 15px;
+          margin:0 15px;
+          font-weight:bold;
           text-decoration: none;
-          color: #333;
+          color: white;
         }
-        img{
-          display:block;
-          margin:20px auto;
-          max-width:800px;
+        nav a:hover{
+          text-decoration: underline;
+        }
+
+        header{
+           text-align:center;
+           padding:20px;
+        }
+        header img{
+          margin-top:15px;
+          max-width:100%;
           border-radius: 10px;
+        }
+        h1{
+         color:#ff6600;
+         margin-bottom: 10px;
+        }
+        .menu-container{
+          max-width: 900px;
+          margin: auto;
+          padding: 20px;
         }
 
         ul{
@@ -29,10 +54,30 @@
 
         li{
           margin-bottom: 15px;
-          padding: 10px;
-          background:#f4f4f4;
-          border-radius: 5px;
+          padding: 15px;
+          background:#fff;
+          border-radius: 8px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        li strong{
+          font-size: 1.2em;
+          color: #333;
+        }
+        .price {
+          float:right;
+          color:#28a745;
+          font-weight: bold;
+        }
+        footer{
+          text-align:center;
+          padding: 15px;
+          background:#f4f4f4;
+          color:#777;
+          margin-top:20px;
+        
+        }
+
+
     </style>
 </head>
 
@@ -41,17 +86,26 @@
         <a href="{% url 'homepage'}">Home</a> |
         <a href="{% url 'about' %}">About Us</a>
     </nav>
-    <h1>{{restaurant_name}}</h1>
-    <h2>Our Menu</h2>
-    <ul>
+    <header>
+        <h1>Welcome to{{ restaurant_name }}</h1>
+    </header>
+    <div class ="menu-container">    
+      <h2>Our Menu</h2>
+      <ul>
         {% for item in menu_items %}
         <li>
-            <strong>{{ item.name }}</strong> - Rs.{{ item.price }}<br> {{ item.description }}
+            <strong>{{ item.name }}</strong> 
+            <span class="price">Rs.{{ item.price }}</span>
+            <p>{{ item.description }}</p>
         </li>
         {% empty %}
         <li>No Menu items available.</li>
         {% endfor %}
-    </ul>
+     </ul>
+    </div>
+    <footer>
+        &copy; {{ restaurant_name }} - All Rights Reserved
+    </footer>
 </body>
 </html>
           
