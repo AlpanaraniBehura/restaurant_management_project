@@ -5,17 +5,16 @@ from django.conf import settings
 # Homepage view
 def homepage(request):
     restaurant_name = getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
-    try:
-        response = requests.get('http://localhost:8000/api/products/menu/') #API Endpoint
-        response.raise_for_status() # Raise error if API fails
-        menu_items = response.json()
-    except requests.RequestException:
-        menu_items = []
-
+    image_url="https//picsum.photos/800/300?"
     return render(request, 'menu.html', {
-            'menu_items':menu_items,
             'restaurant_name':restaurant_name,
+            'image_url':image_url
         })
+# Hardcoded Menu List View
+def menu_list(request):
+    restaurant_name="Our Restaurant"
+# Temporary hardcoded menu items
+manu_
 # About page view
 def about(request):
     restaurant_name=getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
