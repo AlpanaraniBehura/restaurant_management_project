@@ -13,8 +13,34 @@ def homepage(request):
 # Hardcoded Menu List View
 def menu_list(request):
     restaurant_name="Our Restaurant"
-# Temporary hardcoded menu items
-manu_
+    # Temporary hardcoded menu items
+    manu_items= [
+        {
+        "name":"Margherita Pizza",
+        "Price":250,
+        "description":"Classic cheese and tomato pizza."
+        },
+        {
+            "name":"Paneer Butter Masala",
+            "price":400,
+            "description":"Creamy tomato gravy with soft paneer cubes."
+        },
+        {
+            "name":"Veg Biriyani",
+            "Price":200,
+            "description":"Fragrant rice cooked with vegetables and spices."
+        },
+        {
+            "name":"Chocolate Brownie",
+            "price":150,
+            "description":"Rich chocolate brownie with ice cream."
+        },
+    ]
+    return render(request, "menu_list.html",{
+        "restaurant_name":restaurant_name,
+        "menu_items":menu_items
+    })
+
 # About page view
 def about(request):
     restaurant_name=getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
