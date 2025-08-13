@@ -6,25 +6,55 @@
         body{
           font-family:Arial,sans-serif;
           text-align:center;
-          background-color:#f4f4f4;
+          background:#f4f6f8;
+          margin:0;
+          color:#333;
+          display:flex;
+          flex-direction:column;
+          min-height:100vh;
         }
     
         h1{
          color:#333;
+         margin-top:30px;
         }
         img{
           border-radius: 10px;
-          max-width: 100%;
+          max-width: 90%;
+          margin:20px auto;
+          box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
         nav a{
-          margin:0 10px;
+          margin:15px;
+          display: inline-block;
+          padding: 10px 18px;
+          background: #2c3e50;
           text-decoration:none;
-          color:#007BFF;
+          color:#fff;
+          border-radius: 5px;
+          transition:0.3s;
         }
         nav a:hover{
+          background:#1a242f;
+        }
+        footer{
+          background:#2c3e50;
+          color:#fff;
+          padding:15px 0;
+          margin-top:auto;
+          font-size: 14px;
+        }
+
+
+        footer a {
+          color:#fff;
           text-decoration:underline;
         }
+        footer a:hover{
+           color:#ddd;
+        }
+        
     </style>
 </head>
 
@@ -35,5 +65,10 @@
         <a href="{% url 'menu_list' %}">View Menu</a>
         <a href="% utl 'about' %">About Us</a>
     </nav>
+<footer>
+    &copy;{{ restaurant_name }}{{ now|date:"Y"}}|Designed with love |
+    <a href="{% url 'about' %}">About Us</a>
+    
+</footer>    
 </body>
 </html>
