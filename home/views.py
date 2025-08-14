@@ -8,7 +8,7 @@ def homepage(request):
     return render(request, 'menu.html', {
             'restaurant_name':restaurant_name,
             'image_url':image_url
-        })
+    })
 # Hardcoded Menu List View
 def menu_list(request):
     restaurant_name="Our Restaurant"
