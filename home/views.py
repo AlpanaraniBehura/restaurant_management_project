@@ -51,6 +51,9 @@ def about(request):
         'description':"We are a family-run restaurant serving fresh,delicious meals made from locally sourced ingredients",
         'image_url':image_url
     })
+# Contact us page view
+def contact_us(request):
+    return render(request, contact_us.html)
 #Custom 404 page view
 def custom_404(request, exception):
     return render(request, '404.html', status=404) 
