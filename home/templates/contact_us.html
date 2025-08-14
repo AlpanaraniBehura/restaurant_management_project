@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ restaurant_name }}</title>
+    <style>
+        body{
+          font-family:Arial, Sans-serif;
+          background-color:#f4f4f4;
+          padding:20px;
+          text-align:center;
+        }
+        h1{
+          text-align:center;
+          color:#333;
+        }
+        .contact-container{
+           background:white;
+           padding:20px;
+           max-width:600px;
+           margin:auto;
+           border-radius:8px;
+           box-shadow:0 2px 5px rgba(0, 0, 0, 0.1);
+           text-align:left;
+        }
+        .contact-container p{
+          margin:10px 0;
+          font-size:16px;
+        }
+
+        .contact-label{
+          font-weight:bold;
+          color:#007BFF;
+        }
+        
+        .back-btn{
+          display:inline-block;
+          margin-top: 20px;
+          padding:10px 15px;
+          background-color: #007BFF;
+          color: white;
+          text-decoration: none;
+          border-radius:5px;
+        }
+        .back-btn:hover{
+          background-color:#0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Contact Us</h1>
+    <div class="contact-container">
+        <p><span class="contact-label">Address:</span>123 Food Street, Flavor Town</p>
+        <p><span class="contact-label">Phone:</span>+91 7970798675</p>
+        <p><span class="contact-label">Email:</span>info@tastybites.com</p>
+        <p><span class="contact-label">Hours:</span> Mon - Sun | 10:00 AM - 10 PM</p>
+    </div>
+
+    <a href="{% url 'homepage' %}" class="back-btn">Back to Home</a>
+</body>
+</html>
