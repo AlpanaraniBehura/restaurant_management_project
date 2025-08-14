@@ -9,8 +9,6 @@ def homepage(request):
             'restaurant_name':restaurant_name,
             'image_url':image_url
     })
-def home(request):
-    
 # Hardcoded Menu List View
 def menu_list(request):
     restaurant_name="Our Restaurant"
