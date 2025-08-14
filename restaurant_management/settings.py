@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Add a constant for restaurant name
 RESTAURANT_NAME = "Tasty Bites"
+RESTAURANT_PHONE = "+91-7878987987"
+
