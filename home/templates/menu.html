@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
     <title>{{ restaurant_name }} Menu</title>
     <style>
         body{
           font-family:Arial,sans-serif;
-          text-align:center;
           background:#f4f6f8;
           margin:0;
           color:#333;
@@ -13,10 +15,36 @@
           flex-direction:column;
           min-height:100vh;
         }
-    
-        h1{
-         color:#333;
-         margin-top:30px;
+        /*Header with logo and title*/
+        header{
+          display:flex;
+          align-items:center;
+          justify-content: center;
+          padding: 15px 30px;
+          position:relative;
+          background:#fff;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1),
+        
+        }
+        /* Logo Position */
+        .logo-container{
+          position:absolute;
+          left:20px;
+        }
+        .logo-container img{
+               width: 50px;
+               height : 50px;
+               border-radius: 10px;
+        }
+        /* Title in header*/
+        header h1{
+          margin:0;
+          font-size:28px;
+          color: #333;
+        }
+        h2{
+          text-align: center;
+          margin-top:10px;
         }
         img{
           border-radius: 10px;
@@ -24,7 +52,10 @@
           margin:20px auto;
           box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+        nav{
+          text-align: center;
+          margin: 20px 0;
+        }
         nav a{
           margin:15px;
           display: inline-block;
@@ -38,15 +69,17 @@
         nav a:hover{
           background:#1a242f;
         }
+        .content{
+          flex: 1;
+        }
         footer{
           background:#2c3e50;
           color:#fff;
           padding:15px 0;
           margin-top:auto;
           font-size: 14px;
+          text-align: center;
         }
-
-
         footer a {
           color:#fff;
           text-decoration:underline;
@@ -59,18 +92,28 @@
 </head>
 
 <body>
-    <h1>Welcome to {{ restaurant_name }}</h1>
-    <h2>Contact Us: {{ phone_number }}<h2>
-    <img src="{{ image_url }}" alt="Restaurant">
-    <nav>
-        <a href="{% url 'menu_list' %}">View Menu</a>
-        <a href="{% url 'about' %}">About Us</a>
-        <a href="{% url 'contact_us' %}">Contact Us</a>
-    </nav>
+    <!---Header section with logo + title--->
+    <header>
+        <div class="logo-container">
+            <img src="https://dummyimage.com/200*80/2b0060/ffffff&text=My+Restaurant" alt="Restaurant Logo">
+        </div>
+        <h1>Welcome to {{ restaurant_name }}</h1>
+    </header>
+    <div class="content">
+        <h2>Contact Us: {{ phone_number }}<h2>
+        <img src="{{ image_url }}" alt="Restaurant">
+        <nav>
+            <a href="{% url 'menu_list' %}">View Menu</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </nav>
+    </div>
+
     <footer>
-    &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed with love |
-    <a href="{% url 'about' %}">About Us</a> |
-    <a href="{% url 'contact_us' %}">Contact Us</a>
+        &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed with love |
+        <a href="{% url 'about' %}">About Us</a> |
+        <a href="{% url 'contact_us' %}">Contact Us</a>
     </footer>    
 </body>
 </html>
+
