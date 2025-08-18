@@ -63,6 +63,23 @@ def about(request):
 # Contact us page view
 def contact_us(request):
     return render(request, 'contact_us.html')
+
+# Reservation page view
+def reservations(request):
+    return render(request, 'reservations.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
 #Custom 404 page view
 def custom_404(request, exception):
     return render(request, '404.html', status=404) 
