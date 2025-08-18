@@ -44,6 +44,31 @@
         .back-btn:hover{
           background-color:#0056b3;
         }
+        form {
+          margin-top: 20px;
+        }
+        input,textarea{
+           width: 100%;
+           padding: 10px;
+           margin: 8px 0;
+           border:1px solid #add;
+           border-radius: 5px;
+        }
+        button{
+          padding:10px 15px;
+          background-color: #28a745;
+          color:white;
+          border:none;
+          border-radius:5px;
+          cursor: pointer;
+        }
+        button:hover{
+          background-color:#218838;
+        }
+        .error{
+          color:red;
+          font-size:14px;
+        }
     </style>
 </head>
 
@@ -54,8 +79,34 @@
         <p><span class="contact-label">Phone:</span>+91 7970798675</p>
         <p><span class="contact-label">Email:</span>info@tastybites.com</p>
         <p><span class="contact-label">Hours:</span> Mon - Sun | 10:00 AM - 10 PM</p>
+        
+        <!---Contact Form--->
+        <form id="contactForm" onsubmit="return ValidateForm()">
+            <label for="name" class="contact-label">Name:</label>
+            <input type="text" id="name" name="name">
+            <label for="email" class="contact-label">Email:</label>
+            <input type="email" id="email" name="email">
+            <label for="message" class=contact-label>Message:</label>
+            <textarea id="message" name="message"></textarea>
+            <p id="errorMessage" class="error"></p>
+            <button type="submit">Submit</button>
+        </form>
     </div>
-
     <a href="{% url 'homepage' %}" class="back-btn">Back to Home</a>
+    <script>
+        function ValidateForm(){
+          let name=document.getElementById("name").value.trim();
+          let email=document.getElementById("email").value.trim();
+          let errorMessage=document.getElementById("errorMessage");
+          if(name===""||email===""){
+            errorMessage.textContent="Please full in both Name and Email";
+            return false; //stop from submission
+          }
+          errorMessage.textContent=""; //Clear error if valid
+          alert("Form submitted successfully!");
+          return true;
+        }
+    </script>
+
 </body>
 </html>
