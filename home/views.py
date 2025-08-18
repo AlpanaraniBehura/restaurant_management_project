@@ -67,19 +67,6 @@ def contact_us(request):
 # Reservation page view
 def reservations(request):
     return render(request, 'reservations.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Custom 404 page view
 def custom_404(request, exception):
     return render(request, '404.html', status=404) 
