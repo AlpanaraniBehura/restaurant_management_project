@@ -70,3 +70,14 @@ def reservations(request):
 #Custom 404 page view
 def custom_404(request, exception):
     return render(request, '404.html', status=404) 
+
+# Feedback Form View
+def feedback_view(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.post)
+        if form.is_valid():
+            form.save()
+            return redirect('feedback') # Reload after submit
+    else:
+        form = FeedbackForm()
+    return render(request, 'feedback.html', {'form': form})
