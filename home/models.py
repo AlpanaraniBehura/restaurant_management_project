@@ -9,3 +9,73 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
 
+class Restaurant(models.Model):
+    name = models.CharField(max_length=255)
+    owner_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone_number = models.CharField(max_length=20)
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
+    
+    class Customer(models.Model):
+        name = models.CharField(
+            max_length=255,
+            blank=True,
+            null=True,
+            help_text="Customer's name for dine-in or guest orders."
+        )
+        phone = models.CharField(
+            max_length=15,
+            blank=True,
+            null=True,
+            help_text="Customer's phone number for contact or tracking."
+        )
+        email = models.EmailField(
+            blank = True,
+            null = True,
+            help_text = "Customer's email for receipts or marketing."
+        )
+        created_at = models.DateTimeField(
+            auto_now_add=True,
+            help_text="Time when the customer record was created."
+        )
+        def __str__(self):
+            # If name exists,show it,else fallback to phone or 'Guest'
+            return self.name or self.phone or "Guest Customer"
+        class Meta:
+            ordering = ['-created_at']
+            verbose_name="Customer"
+            verbose_name_plural = "Customers"
+    class Feedback(models.Model):
+        comment = models.TextField()
+        created_at = models.DateTimeField(auto_now_add=True)
+
+        def __str__(self):
+            return self.comment[:50]  #Show first 50 chars in admin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
