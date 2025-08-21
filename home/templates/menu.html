@@ -69,6 +69,7 @@
           max-width: 90%;
           margin:20px auto;
           box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
+          display:block;
         }
         nav{
           text-align: center;
@@ -125,7 +126,7 @@
         </form>
     </div>
     <div class="content">
-        <h2>Contact Us: {{ phone_number }}<h2>
+        <h2>Contact Us: {{ phone_number }}</h2>
         <img src="{{ image_url }}" alt="Restaurant">
         <nav>
             <a href="{% url 'menu_list' %}">View Menu</a>
@@ -134,6 +135,17 @@
             <a href="{% url 'reservations' %}">Reservations</a>
         </nav>
     </div>
+    <section class="address-section" style="text-align: center; margin: 40px 0;">
+        <h2>Our Address</h2>
+        <p>123 Food Street, Bhubaneswar, Odisha, India</p>
+        
+        <!--Embedded Google Map-->
+        <div style="margin-top: 20px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d119735.66023900273!2d85.73902972081146!3d20.311051839664323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1s123%20Food%20Streert%2C%20Bhubaneswar%2C%20Odisha%2C%20India!5e0!3m2!1sen!2sin!4v1755765002670!5m2!1sen!2sin"
+                width = "600" height = "450" style = "border:0;" allowfullscreen="" loading="lazy" refferpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+    </section>
     <footer>
         &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love
         <div class="hours">
@@ -142,5 +154,3 @@
     </footer>    
 </body>
 </html>
-</html>
-
