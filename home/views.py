@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.conf import settings
 from django.http import HttpResponse
+from .forms import FeedbackForm
 
 # Homepage view
 def homepage(request):
@@ -74,7 +75,7 @@ def custom_404(request, exception):
 # Feedback Form View
 def feedback_view(request):
     if request.method == "POST":
-        form = FeedbackForm(request.post)
+        form = FeedbackForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('feedback') # Reload after submit
