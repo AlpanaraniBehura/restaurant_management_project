@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Menu, Restaurant, Customer, Feedback, MenuItem
+from .models import Menu, Restaurant, Customer, Feedback, MenuItem, RestaurantLocation
 
 # Register your models here.
 admin.site.register(Menu)
@@ -14,4 +14,4 @@ admin.site.register(Feedback)
 class MenuItemAdmin(admin.ModelAdmin):
     list_display = ("name","price")
     search_fields = ("name",)
-
+admin.site.register(RestaurantLocation)
