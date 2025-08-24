@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.conf import settings
 from django.http import HttpResponse
 from .forms import FeedbackForm
+from .models import MenuItem
 
 # Homepage view
 def homepage(request):
@@ -14,41 +15,12 @@ def homepage(request):
             'image_url':image_url
             
     })
-# Hardcoded Menu List View
+#  Menu List View
 def menu_list(request):
-    restaurant_name="Our Restaurant"
-    # Temporary hardcoded menu items
-    try:
-        menu_items= [
-            {
-                "name":"Margherita Pizza",
-   
-                "price":250,
-                "description":"Classic cheese and tomato pizza."
-            },
-            {
-                "name":"Paneer Butter Masala",
-                "price":400,
-                "description":"Creamy tomato gravy with soft paneer cubes."
-            },
-            {
-                "name":"Veg Biriyani",
-                "price":200,
-                "description":"Fragrant rice cooked with vegetables and spices."
-            },
-            {
-                "name":"Chocolate Brownie",
-                "price":150,
-                "description":"Rich chocolate brownie with ice cream."
-            },
-        ]
-        
-        return render(request, "menu_list.html",{
-            "restaurant_name":restaurant_name,
-            "menu_items":menu_items
-        })
-    except Exception as e:
-        return HttpResponse(f"Something went wrong while loading the menu: {str(e)}, status=500")
+    # Fetch all the menu items from database
+    items = MenuItem.objects.all()
+    return render(request, "menu_list.html", {"menu_items": items})
+
 # About page view
 def about(request):
     restaurant_name=getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
