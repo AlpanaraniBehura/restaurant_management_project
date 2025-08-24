@@ -139,6 +139,12 @@
     <section class="address-section" style="text-align: center; margin: 40px 0;">
         <h2>Our Address</h2>
         <p>{{ restaurant.address }}, {{ restaurant.city }}</p>
+        <h3>Opening Hours</h3>
+        <ul>
+            {% for day, hours in restaurant.Opening_hours.items %}
+               <li><strong>{{ day }}:</strong>{{ hours }}</li>
+            {% endfor %}
+        </ul>
         
         <!--Embedded Google Map-->
         <div style="margin-top: 20px;">
