@@ -6,13 +6,12 @@ from .models import MenuItem
 
 # Homepage view
 def homepage(request):
-    restaurant_name = getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
-    phone_number = getattr(settings,"RESTAURANT_PHONE", "Not Available")
+    # Fetch the first restaurant entry
+    restaurant = Restaurant.objects.first()
     image_url="https://picsum.photos/800/300?"
     return render(request, 'menu.html', {
-            'restaurant_name':restaurant_name,
-            'phone_number':phone_number,
-            'image_url':image_url
+        'restaurant':restaurant,
+        'image_url':image_url
             
     })
 #  Menu List View
