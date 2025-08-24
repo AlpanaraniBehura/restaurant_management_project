@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.conf import settings
 from django.http import HttpResponse
 from .forms import FeedbackForm
-from .models import MenuItem
+from .models import MenuItem, Restaurant
 
 # Homepage view
 def homepage(request):
