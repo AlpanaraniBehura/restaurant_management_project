@@ -126,7 +126,7 @@
         </form>
     </div>
     <div class="content">
-        <h2>Contact Us: {{ phone_number }}</h2>
+        <h2>Contact Us: {{ restaurant.phone_number }}</h2>
         <img src="{{ image_url }}" alt="Restaurant">
         <nav>
             <a href="{% url 'menu_list' %}">View Menu</a>
@@ -135,9 +135,10 @@
             <a href="{% url 'reservations' %}">Reservations</a>
         </nav>
     </div>
+    <!--Address Section-->
     <section class="address-section" style="text-align: center; margin: 40px 0;">
         <h2>Our Address</h2>
-        <p>123 Food Street, Bhubaneswar, Odisha, India</p>
+        <p>{{ restaurant.address }}, {{ restaurant.city }}</p>
         
         <!--Embedded Google Map-->
         <div style="margin-top: 20px;">
