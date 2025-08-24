@@ -55,6 +55,13 @@
           font-size: 13px;
           color: #ddd;
         }
+        .menu-img{
+          width: 250px;
+          height: 180px;
+          object-fit: cover;
+          border-radius: 10px;
+        
+        }
     </style>
 </head>
 <body>
@@ -66,6 +73,11 @@
             <h2>{{ item.name }}</h2>
             {% if item.description %}
             <p>{{ item.description }}</p>{% endif %}
+            {% if item.image %}
+               <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-img">
+            {% else %}
+               <img src="https://via.placeholder.com/250*150.png?text=No+Image" alt="No Image" class="menu-img">
+            {% endif %}
             <p class="price">Rs. {{ item.price }}</p>
         </div>
         {% endfor %}
