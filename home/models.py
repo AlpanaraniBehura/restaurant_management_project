@@ -18,6 +18,7 @@ class Restaurant(models.Model):
     address = models.TextField()
     city = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
+    opening_hours = models.JSONField(default=dict)
     def __str__(self):
         return self.name
     
