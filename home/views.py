@@ -12,7 +12,6 @@ def homepage(request):
     return render(request, 'menu.html', {
         'restaurant':restaurant,
         'image_url':image_url
-            
     })
 #  Menu List View
 def menu_list(request):
