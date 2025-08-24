@@ -1,4 +1,5 @@
 from django.db import models
+from PIL import Image
 
 # Create your models here.
 class Menu(models.Model):
@@ -54,15 +55,28 @@ class Feedback(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.comment[:50]  #Show first 50 chars in admin
+        return self.comment[:50]  # Show first 50 chars in admin
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    image = models.ImageField(upload_to='menu_images/', blank=True, null=True)
 
-    def __str__(self):
-        return self.name
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # First save original image
+
+        if self.image:
+            img = Image.open(self.image.path)
+
+            # Resize (example: max width=800px)
+            max_width = 800
+            if img.width > max_width:
+                ratio = max_width / float(img.width)
+                height = int(float(img.height) * ratio)
+                img = img.resize((max_width, height), Image.Resampling.LANCZOS)
+                img.save(self.image.path) # Overwrite with resize
+
 
 class RestaurantLocation(models.Model):
     address = models.CharField(max_length=255)
