@@ -33,7 +33,7 @@
         .back-btn{
           display: inline-block;
           margin-top: 20px;
-          padding : 10px, 15px;
+          padding : 10px 15px;
           background: #2c3e50;
           color: #fff;
           text-decoration: none;
@@ -76,7 +76,7 @@
             {% if item.image %}
                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="menu-img">
             {% else %}
-               <img src="https://via.placeholder.com/250*150.png?text=No+Image" alt="No Image" class="menu-img">
+               <img src="https://via.placeholder.com/250x150.png?text=No+Image" alt="No Image" class="menu-img">
             {% endif %}
             <p class="price">Rs. {{ item.price }}</p>
         </div>
@@ -90,7 +90,7 @@
     </div>
 
     <footer> 
-        &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love
+        &copy; {{ restaurant_name }} {{ now|date:"Y" }} | Designed With Love
         <div class="hours">
             Opening Hours: Mon-Fri: 11am - 9pm | Sat-Sun: 10am - 10pm
         </div>
