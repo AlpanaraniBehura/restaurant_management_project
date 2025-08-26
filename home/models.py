@@ -19,6 +19,7 @@ class Restaurant(models.Model):
     city = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     opening_hours = models.JSONField(default=dict)
+    logo = models.ImageField(upload_to='logos/', blank=True, null=True) # Field for logo
     def __str__(self):
         return self.name
     
