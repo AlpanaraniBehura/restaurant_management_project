@@ -144,7 +144,7 @@
        </div>
     {% endif %}
     <div class="content">
-        <h2>Contact Us: {{ restaurant.phone_number }}</h2>
+        <h2>Contact Us: {{ restaurant.phone }}</h2>
         <img src="{{ image_url }}" alt="Restaurant">
         <nav>
             <a href="{% url 'menu_list' %}">View Menu</a>
@@ -157,6 +157,7 @@
     <section class="address-section" style="text-align: center; margin: 40px 0;">
         <h2>Our Address</h2>
         <p>{{ restaurant.address }}, {{ restaurant.city }}</p>
+        <p><strong>Phone:</strong> {{ restaurant.phone }}</p>
         <h3>Opening Hours</h3>
         <ul>
             {% for day, hours in restaurant.Opening_hours.items %}
