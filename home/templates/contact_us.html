@@ -97,32 +97,19 @@
         <p><span class="contact-label">Hours:</span> Mon - Sun | 10:00 AM - 10 PM</p>
         
         <!---Contact Form--->
-        <form id="contactForm" onsubmit="return ValidateForm()">
+        <form method="post" action="{% url 'contact_us' %}">
+            {% csrf_token %}
             <label for="name" class="contact-label">Name:</label>
-            <input type="text" id="name" name="name">
+            <input type="text" id="name" name="name" required>
             <label for="email" class="contact-label">Email:</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email" name="email" required>
             <label for="message" class="contact-label">Message:</label>
-            <textarea id="message" name="message"></textarea>
+            <textarea id="message" name="message" required></textarea>
             <p id="errorMessage" class="error"></p>
             <button type="submit">Submit</button>
         </form>
     </div>
     <a href="{% url 'homepage' %}" class="back-btn">Back to Home</a>
-    <script>
-        function ValidateForm(){
-          let name=document.getElementById("name").value.trim();
-          let email=document.getElementById("email").value.trim();
-          let errorMessage=document.getElementById("errorMessage");
-          if(name===""||email===""){
-            errorMessage.textContent="Please fill in both Name and Email";
-            return false; //stop from submission
-          }
-          errorMessage.textContent=""; //Clear error if valid
-          alert("Form submitted successfully!");
-          return true;
-        }
-    </script>
     <footer>
         &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love
         <div class="hours">
