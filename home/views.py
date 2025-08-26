@@ -3,6 +3,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from .forms import FeedbackForm
 from .models import MenuItem, Restaurant
+from django.core.mail import EmailMessage
 
 # Homepage view
 def homepage(request):
@@ -33,7 +34,28 @@ def about(request):
     })
 # Contact us page view
 def contact_us(request):
-    return render(request, 'contact_us.html')
+    if request.method == "POST":
+        name = request.POST.get("name")
+        user_email = request.POST.get("email")
+        message = request.POST.get("message")
+
+        email_subject = f"New contact form submission from {name}"
+        email_body = f"Message: {message}\n\nSender Email: {user_email}"
+
+        email = EmailMessage(
+            subject=email_subject,
+            body=email_body,
+            from_email=settings.EMAIL_HOST_USER, # your Gmail account
+            to=["ranialpana38@gmail.com"],       # Where you want to receive
+            reply_to=[user_email]                # reply goes to user's email
+        )
+        email.send()
+
+        return redirect("contact_success")
+    return render(request, "contact_us.html")
+
+def contact_success(request):
+    return render(request, "contact_success.html")
 
 # Reservation page view
 def reservations(request):
