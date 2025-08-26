@@ -131,3 +131,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Add a constant for restaurant name
 RESTAURANT_NAME = "TASTY BITES"
 RESTAURANT_PHONE = "+91-7878987987"
+
+EMAIL_BACKEND = "django.core.mail.backend.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "ranialpana30@gmail.com" # Use your Gmail id 
+EMAIL_HOST_PASSWORD = "example"            # Use your Gmail password(Not your normal gmail password)
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
