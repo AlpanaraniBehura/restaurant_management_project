@@ -14,7 +14,7 @@ def homepage(request):
     query = request.GET.get("search") # get search query
     if query:
         # Simple string comparison(case-insensitive contains)
-        menu_items = MenuItem.objects.filter(name_icontains=query)
+        menu_items = MenuItem.objects.filter(name__icontains=query)
     else:
         menu_items = None # no search done
 
