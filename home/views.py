@@ -10,9 +10,19 @@ def homepage(request):
     # Fetch the first restaurant entry
     restaurant = Restaurant.objects.first()
     image_url="https://picsum.photos/800/300?"
+
+    query = request.GET.get("search") # get search query
+    if query:
+        # Simple string comparison(case-insensitive contains)
+        menu_items = MenuItem.objects.filter(name_icontains=query)
+    else:
+        menu_items = None # no search done
+
     return render(request, 'menu.html', {
-        'restaurant':restaurant,
-        'image_url':image_url
+        'restaurant': restaurant,
+        'image_url': image_url,
+        'menu_items': menu_items,
+        'query': query,
     })
 #  Menu List View
 def menu_list(request):
