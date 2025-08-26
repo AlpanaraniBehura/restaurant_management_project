@@ -125,6 +125,24 @@
             <button type="submit">Search</button>
         </form>
     </div>
+    <!-- Search Results -->
+    {% if query %}
+       <div style="text-align:center; margin:20px;">
+           <h2> Search Results for "{{ query }}"</h2>
+           {% if menu_items %}
+              <ul style="list-style:none; padding:0;">
+                {% for item in menu_items %}
+                   <li style="margin:10px 0;">
+                       <strong>{{ item.name }}</strong> - Rs. {{ item.price }}<br>
+                       <em>{{ item.description }}</em>
+                    </li>
+                {% endfor %}
+              </ul>
+           {% else %}
+              <p> No menu items found.</p>
+           {% endif %}
+       </div>
+    {% endif %}
     <div class="content">
         <h2>Contact Us: {{ restaurant.phone_number }}</h2>
         <img src="{{ image_url }}" alt="Restaurant">
