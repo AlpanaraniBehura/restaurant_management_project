@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.conf import settings
 from django.http import HttpResponse
-from .forms import FeedbackForm
+from .forms import FeedbackForm, ContactForm
 from .models import MenuItem, Restaurant
 from django.core.mail import EmailMessage
 
@@ -32,24 +32,29 @@ def menu_list(request):
 
 # About page view
 def about(request):
-    restaurant_name=getattr(settings, "RESTAURANT_NAME", "Our Restaurant")
-    phone_number=getattr(settings, "RESTAURANT_PHONE", "Not Available")
+    restaurant = Restaurant.objects.first()
     image_url = "https://picsum.photos/800/300?random=2" # Random Placeholder image 
     
-    return render(request, 'about.html',{
-        'restaurant_name':restaurant_name,
-        'phone_number':phone_number,
-        'description':"We are a family-run restaurant serving fresh,delicious meals made from locally sourced ingredients",
-        'image_url':image_url
-    })
+    context = {
+        'restaurant':restaurant,
+        'image_url':image_url,
+        'history': "Founded in 2010, our restaurant has been serving delicious meals made from locally sourced ingredients.",
+        'mission': "Our mission is to provide a memorable dining experience with fresh, high-quality food and excellent service.",
+        'vision': "To be the most loved family restaurant in the city.",
+    }
+     
+    return render(request, 'about.html', context)
+    
 # Contact us page view
 def contact_us(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        user_email = request.POST.get("email")
-        message = request.POST.get("message")
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            user_email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
 
-        email_subject = f"New contact form submission from {name}"
+        email_subject = f"New Contact Form Submission from {name}"
         email_body = f"Message: {message}\n\nSender Email: {user_email}"
 
         email = EmailMessage(
@@ -62,7 +67,9 @@ def contact_us(request):
         email.send()
 
         return redirect("contact_success")
-    return render(request, "contact_us.html")
+    else:
+        form = ContactForm()
+    return render(request, "contact_us.html", {"form": form})
 
 def contact_success(request):
     return render(request, "contact_success.html")
