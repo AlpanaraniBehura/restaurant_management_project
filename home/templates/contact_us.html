@@ -96,7 +96,7 @@
         <p><span class="contact-label">Email:</span>info@tastybites.com</p>
         <p><span class="contact-label">Hours:</span> Mon - Sun | 10:00 AM - 10 PM</p>
         
-        <!---Contact Form--->
+        <!-- Contact Form -->
         <form method="post" action="{% url 'contact_us' %}">
             {% csrf_token %}
             <!-- Non-field errors (general form errors) -->
@@ -107,7 +107,7 @@
 
             <label for="id_email" class="contact-label">Email:</label>
             {{ form.email }}
-            {{ form.name.errors }}
+            {{ form.email.errors }}
 
             <label for="id_message" class="contact-label">Message:</label>
             {{ form.message }}
@@ -120,7 +120,7 @@
         <a href="{% url 'homepage' %}" class="back-btn">Back to Home</a>
     </div>
     <footer>
-        &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love
+        &copy; {{ restaurant_name }} {{ now|date:"Y" }}| Designed With Love
         <div class="hours">
             Opening Hours: Mon-Fri: 11am-9pm | Sat-Sun: 10am - 10pm
         </div>
