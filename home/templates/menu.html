@@ -43,6 +43,17 @@
           font-size:28px;
           color: #333;
         } 
+        .cart-counter {
+          position: absolute;
+          right: 20px;
+          font-size:16px;
+          background: #2c3e50;
+          color: #fff;
+          padding: 6px 12px;
+          border-radius: 5px;
+
+        
+        }
         /* Search Bar */
         .search-bar{
            text-align: center;
@@ -117,36 +128,32 @@
     <header>
       {% if restaurant.logo %}
         <div class="logo-container">
-            <img src="{{ restaurant.logo.url}}" alt="{{ restaurant.name }} Logo" class="logo-img">
+            <img src="{{ restaurant.logo.url }}" alt="{{ restaurant.name }} Logo" class="logo-img">
         </div>
       {% endif %}
-        <h1>Welcome to {{ restaurant.name }}</h1>
+      <h1>Welcome to {{ restaurant.name }}</h1>
+      <div class="cart-counter">Cart {{ total_items }}</div>
     </header>
     <!-- Search Bar -->
-    <div class="search-bar">
-        <form method="get" action="#">
-            <input type="text" name="search" placeholder="Search Menu Items...." required>
-            <button type="submit">Search</button>
-        </form>
-    </div>
-    <!-- Search Results -->
-    {% if query %}
-       <div style="text-align:center; margin:20px;">
-           <h2> Search Results for "{{ query }}"</h2>
-           {% if menu_items %}
-              <ul style="list-style:none; padding:0;">
-                {% for item in menu_items %}
-                   <li style="margin:10px 0;">
-                       <strong>{{ item.name }}</strong> - Rs. {{ item.price }}<br>
-                       <em>{{ item.description }}</em>
-                    </li>
-                {% endfor %}
-              </ul>
-           {% else %}
-              <p> No menu items found.</p>
-           {% endif %}
-       </div>
-    {% endif %}
+    <form method="get" action="">
+    <input type="text" name="q" placeholder="Search items..." value="{{ query }}">
+    <button type="submit">Search</button>
+    </form>
+    <p><a href="{% url 'view_cart' %}">View Cart ({{ cart_count }})</a></p>
+   <img src="{{ image_url }}" alt="Restaurant Image">
+
+   <ul>
+   {% for item in menu_items %}
+     <li>
+        {{ item.name }} - ${{ item.price }}
+        <a href="{% url 'add_to_cart' item.id %}">Add to Cart</a>
+     </li>
+     {% empty %}
+     <li> No items found.</li>
+     {% endfor %}
+
+   </ul>
+   <!-- Content -->
     <div class="content">
         <h2>Contact Us: {{ restaurant.phone }}</h2>
         <img src="{{ image_url }}" alt="Restaurant">
@@ -177,8 +184,8 @@
         </div>
 
     </section>
-    <footer>
-        &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love
+    <footer>  ac
+        &copy;{{ restaurant_name }}{{ now|date:"Y" }}|Designed With Love/
         <div class="hours">
             Opening Hours: Mon-Fri: 11am - 9pm | Sat-Sun: 10am - 10pm
         </div>   
