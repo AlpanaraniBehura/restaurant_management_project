@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .forms import FeedbackForm, ContactForm
 from .models import MenuItem, Restaurant
 from django.core.mail import EmailMessage
+from django.db.models import Q
 
 # Homepage view
 def homepage(request):
@@ -11,18 +12,24 @@ def homepage(request):
     restaurant = Restaurant.objects.first()
     image_url="https://picsum.photos/800/300?"
 
-    query = request.GET.get("search") # get search query
+    query = request.GET.get("q") # get search query
+    menu_items = MenuItem.objects.all()
     if query:
         # Simple string comparison(case-insensitive contains)
-        menu_items = MenuItem.objects.filter(name__icontains=query)
-    else:
-        menu_items = None # no search done
+        words = query.split()
+        for word in words:
+            menu_items = menu_items.filter(
+                Q(name__icontains=word) | Q(description__icontains=word)
+            )
+    cart = request.session.get("cart",{})
+    cart_count = sum(cart_values())
 
     return render(request, 'menu.html', {
-        'restaurant': restaurant,
-        'image_url': image_url,
-        'menu_items': menu_items,
-        'query': query,
+        "restaurant": restaurant,
+        "image_url": image_url,
+        "menu_items": menu_items,
+        "cart_count": cart_count,
+        "query": query or ""
     })
 #  Menu List View
 def menu_list(request):
@@ -46,7 +53,7 @@ def about(request):
     return render(request, 'about.html', context)
     
 # Contact us page view
-def contact_us(request):
+def contact_us(request):r
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -90,4 +97,52 @@ def feedback_view(request):
             return redirect('feedback') # Reload after submit
     else:
         form = FeedbackForm()
-    return render(request, 'feedback.html', {'form': form})
+    return render(request, 'feedback.html', {'form': form})(
+
+def add_to_cart(request, item_id):
+    cart = request.session.get('cart', {})
+    
+    # Increase quantity if item already exist
+    cart[item_id] = cart.get(item_id, 0) + 1
+
+    # Save back to session
+    request.session['cart'] = cart
+    request.session.modified = True
+
+    return redirect("homepage")
+
+
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    cart_items = []
+    total = 0
+
+    for item_id, qty in cart.items():
+        try:
+            item = MenuItem.objects.get(id=item_id)
+            cart_items.append({"item": item, "quantity": qty})
+            total += item.price * qty
+        expect MenuItem.DoesNotExist:
+            continue
+    return render (request, "cart.html", {"cart_items": cart_items, "total": total})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
