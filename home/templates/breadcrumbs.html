@@ -1,0 +1,69 @@
+<nav aria-label="breadcrumb" style="margin: 10px 0;">
+    <ol class="breadcrumb">
+        <li>
+            <a href="{% url 'homepage' %}" class="breadcrumb-link">Home</a>
+            {% if breadcrumbs %} &rsaquo; {% endif %}
+        </li>
+        {% for name, url in breadcrumbs %}
+           <li>
+             {% if url %}
+                <a href="{{ url }}" class="breadcrumb-link">{{ name }}</a>
+             {% endif %}
+             {% if not forloop.last %} &rsaquo; {% endif %}
+           </li>
+        {% endfor %}
+    </ol>
+</nav>
+
+<style>
+    .breadcrumb {
+      list-style: name;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+    }
+    .breadcrumb-link {
+      text-decoration: none;
+      color: #007bff;
+      white-space: nowrap;
+    }
+    
+    .breadcrumb-link:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb-current{
+      color: #6c757d;
+      white-space: nowrap;
+    }
+    /*--- Responsive styles --- */
+    @media (max-width: 600px) {
+      .breadcrumb{
+        font-size: 12px;
+        overflow: hidden;
+        text-decoration: ellipsis;
+        white-space: nowrap;
+        
+      }
+    }
+    
+    .breadcrumb li:not(:first-child):not(:last-child) {
+      display: none; /* Hide middle crumbs*/
+    }
+    .breadcrumb li:first-child::after{
+      content: "... &rsaquo; ";
+      color: #6c757d;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+
